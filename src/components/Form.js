@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../index.css';
 
 class Form extends React.Component {
   render() {
@@ -13,7 +12,7 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
+      // hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
@@ -23,12 +22,12 @@ class Form extends React.Component {
       <div>
         <h1>Adicionar nova Carta</h1>
         <form className="forms">
-          <label htmlFor="name">
+          <label htmlFor="cardName">
             Nome
             <input
               type="text"
-              name="name"
-              id="name"
+              name="cardName"
+              id="cardName"
               data-testid="name-input"
               value={ cardName }
               onChange={ onInputChange }
@@ -38,13 +37,13 @@ class Form extends React.Component {
           <label htmlFor="description">
             Descrição
             <textarea
-              name="description"
-              id="description"
+              name="cardDescription"
+              id="cardDescription"
               cols="60"
               rows="6"
               data-testid="description-input"
               value={ cardDescription }
-              onChange={ (event) => onInputChange(event) }
+              onChange={ onInputChange }
             />
           </label>
 
@@ -52,8 +51,8 @@ class Form extends React.Component {
             Attr01
             <input
               type="number"
-              name="attr1"
-              id="attr1"
+              name="cardAttr1"
+              id="cardAttr1"
               data-testid="attr1-input"
               value={ cardAttr1 }
               onChange={ onInputChange }
@@ -64,8 +63,8 @@ class Form extends React.Component {
             Attr02
             <input
               type="number"
-              name="attr2"
-              id="attr2"
+              name="cardAttr2"
+              id="cardAttr2"
               data-testid="attr2-input"
               value={ cardAttr2 }
               onChange={ onInputChange }
@@ -76,8 +75,8 @@ class Form extends React.Component {
             Attr03
             <input
               type="number"
-              name="attr3"
-              id="attr3"
+              name="cardAttr3"
+              id="cardAttr3"
               data-testid="attr3-input"
               value={ cardAttr3 }
               onChange={ onInputChange }
@@ -92,7 +91,7 @@ class Form extends React.Component {
             Imagem
             <input
               type="text"
-              name="imagem"
+              name="cardImagem"
               id="imagem"
               data-testid="image-input"
               value={ cardImage }
@@ -103,11 +102,11 @@ class Form extends React.Component {
           <label htmlFor="rarity ">
             Raridade
             <select
-              name="rarity "
+              name="cardRare "
               id="rarity "
               data-testid="rare-input"
               value={ cardRare }
-              onChange={ (event) => onInputChange(event) }
+              onChange={ onInputChange }
             >
               <option>normal</option>
               <option>raro</option>
@@ -118,7 +117,7 @@ class Form extends React.Component {
           <label htmlFor="super">
             <input
               type="checkbox"
-              name="super"
+              name="cardTrunfo"
               id="super"
               data-testid="trunfo-input"
               checked={ cardTrunfo }
@@ -127,11 +126,15 @@ class Form extends React.Component {
             Super Trybe trunfo
           </label>
 
+          {/* {hasTrunfo
+            ? <h4>Você já tem um Super Trunfo em seu baralho</h4>
+            : checkBoxTrunfo} */}
+
           <button
             type="submit"
             data-testid="save-button"
             disabled={ isSaveButtonDisabled }
-            onClick={ () => onSaveButtonClick() }
+            onClick={ onSaveButtonClick }
           >
             Salvar
           </button>
@@ -150,7 +153,7 @@ Form.propTypes = {
   cardImage: PropTypes.string,
   cardRare: PropTypes.string,
   cardTrunfo: PropTypes.bool,
-  hasTrunfo: PropTypes.bool,
+  // hasTrunfo: PropTypes.bool,
   isSaveButtonDisabled: PropTypes.bool,
   onInputChange: PropTypes.func,
   onSaveButtonClick: PropTypes.func,
