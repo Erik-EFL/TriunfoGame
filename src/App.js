@@ -3,7 +3,6 @@ import Form from './components/Form';
 import Card from './components/Card';
 
 const MAX_ATB = 90;
-const MAX_SUM_ATB = 210;
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,26 +17,27 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
-      trunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
     };
   }
 
   inputValueCheck = () => {
-    const validateInputs = [];
-    const { cardAttr1, cardAttr2, cardAttr3 } = this.state;
-    Object.entries(this.state).forEach(([key, value]) => {
-      if ((key.includes('cardAttr')
-      && (Number(value) < 0 || Number(value) > MAX_ATB)) || value === '') {
-        validateInputs.push(false);
-      }
-    });
-    if (Number(cardAttr1) + Number(cardAttr2)
-      + Number(cardAttr3) > MAX_SUM_ATB) {
-      validateInputs.push(false);
-    }
-    if (!validateInputs.includes(false)) {
+    const {
+      cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
+    } = this.state;
+    const fields = [cardName, cardDescription, cardImage];
+    let verify = true;
+    const maxValidate = (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
+    < Number('210'));
+
+    const notEmptyFields = fields.every((field) => field !== '');
+
+    if (Number(cardAttr1) > Number(MAX_ATB) || Number(cardAttr1) <= 0) verify = false;
+    if (Number(cardAttr2) > Number(MAX_ATB) || Number(cardAttr2) <= 0) verify = false;
+    if (Number(cardAttr3) > Number(MAX_ATB) || Number(cardAttr3) <= 0) verify = false;
+
+    if (notEmptyFields && verify && cardRare && maxValidate) {
       this.setState({ isSaveButtonDisabled: false });
     } else {
       this.setState({ isSaveButtonDisabled: true });
@@ -62,7 +62,7 @@ class App extends React.Component {
          isSaveButtonDisabled: true,
        };
      });
-     if (cardTrunfo) this.setState(() => ({ hasTrunfo: true, trunfo: false }));
+     if (cardTrunfo) this.setState(() => ({ hasTrunfo: true }));
    }
 
    /* Tive o auxilio dos amigos Sheila Nakashima Thiago Medeiros e Thiago Zardo
