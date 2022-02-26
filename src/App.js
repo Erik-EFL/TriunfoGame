@@ -18,6 +18,7 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
+      trunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
     };
@@ -46,7 +47,6 @@ class App extends React.Component {
    onSaveButtonClick = (event) => {
      event.preventDefault();
      const { cardTrunfo } = this.state;
-     if (cardTrunfo) this.setState({ hasTrunfo: true });
      this.setState((prev) => {
        const cards = { ...prev };
        return {
@@ -62,6 +62,7 @@ class App extends React.Component {
          isSaveButtonDisabled: true,
        };
      });
+     if (cardTrunfo) this.setState(() => ({ hasTrunfo: true, trunfo: false }));
    }
 
    /* Tive o auxilio dos amigos Sheila Nakashima Thiago Medeiros e Thiago Zardo
@@ -81,6 +82,7 @@ class App extends React.Component {
        cardImage,
        cardRare,
        cardTrunfo,
+       hasTrunfo,
        isSaveButtonDisabled,
      } = this.state;
 
@@ -97,6 +99,7 @@ class App extends React.Component {
            cardImage={ cardImage }
            cardRare={ cardRare }
            cardTrunfo={ cardTrunfo }
+           hasTrunfo={ hasTrunfo }
            onInputChange={ this.onInputChange }
            onSaveButtonClick={ this.onSaveButtonClick }
            isSaveButtonDisabled={ isSaveButtonDisabled }
