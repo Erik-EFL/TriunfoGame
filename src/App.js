@@ -28,9 +28,9 @@ class App extends React.Component {
     } = this.state;
 
     let verify = true;
-    if (Number(cardAttr1) > Number(MAX_ATB) || Number(cardAttr1) <= 0) verify = false;
-    if (Number(cardAttr2) > Number(MAX_ATB) || Number(cardAttr2) <= 0) verify = false;
-    if (Number(cardAttr3) > Number(MAX_ATB) || Number(cardAttr3) <= 0) verify = false;
+    if (Number(cardAttr1) > Number(MAX_ATB) || Number(cardAttr1) < 0) verify = false;
+    if (Number(cardAttr2) > Number(MAX_ATB) || Number(cardAttr2) < 0) verify = false;
+    if (Number(cardAttr3) > Number(MAX_ATB) || Number(cardAttr3) < 0) verify = false;
 
     const maxValidate = (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
     <= Number('210'));
@@ -67,8 +67,14 @@ class App extends React.Component {
     });
   }
 
-  deleteCard = () => {
-
+  /* usei como refente para criar parte desta function => [
+    https://qastack.com.br/programming/36326612/delete-item-from-state-array
+    -in-react */
+  deleteCard = (event) => {
+    const { deck } = this.state;
+    const filteredCards = deck.filter((card) => card.cardName !== event.target.value);
+    const hasTrunfo = filteredCards.some((card) => card.cardTrunfo);
+    this.setState({ deck: filteredCards, hasTrunfo });
   }
 
   /* Tive o auxilio dos amigos Sheila Nakashima Thiago Medeiros e Thiago Zardo
@@ -130,6 +136,14 @@ class App extends React.Component {
                   cardImage={ card.cardImage }
                   cardTrunfo={ card.cardTrunfo }
                 />
+                <button
+                  data-testid="delete-button"
+                  type="button"
+                  value={ card.cardName }
+                  onClick={ this.deleteCard }
+                >
+                  Excluir
+                </button>
               </div>
             ))
           }
