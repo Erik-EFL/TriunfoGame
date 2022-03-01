@@ -2,7 +2,6 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 
-const MAX_ATB = 90;
 class App extends React.Component {
   constructor() {
     super();
@@ -28,13 +27,13 @@ class App extends React.Component {
     } = this.state;
 
     let verify = true;
-    if (Number(cardAttr1) > Number(MAX_ATB) || Number(cardAttr1) < 0) verify = false;
-    if (Number(cardAttr2) > Number(MAX_ATB) || Number(cardAttr2) < 0) verify = false;
-    if (Number(cardAttr3) > Number(MAX_ATB) || Number(cardAttr3) < 0) verify = false;
-
+    const atributes = [cardAttr1, cardAttr2, cardAttr3];
+    atributes.forEach((field) => {
+      if (Number(field) > Number('90')
+     || Number(field) < 0) verify = false;
+    });
     const maxValidate = (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
     <= Number('210'));
-
     const fields = [cardName, cardDescription, cardImage];
     const notEmptyFields = fields.every((field) => field !== '');
 
