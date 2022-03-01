@@ -19,15 +19,14 @@ class Form extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="app-form">
         <h1>Adicionar nova Carta</h1>
         <form className="forms">
           <label htmlFor="cardName">
-            Nome
+            Nome:
             <input
               type="text"
               name="cardName"
-              id="cardName"
               data-testid="name-input"
               value={ cardName }
               onChange={ onInputChange }
@@ -35,24 +34,22 @@ class Form extends React.Component {
           </label>
 
           <label htmlFor="cardDescription">
-            Descrição
+            Descrição:
             <textarea
-              name="cardDescription"
-              id="cardDescription"
               cols="60"
-              rows="6"
               data-testid="description-input"
+              name="cardDescription"
+              rows="6"
               value={ cardDescription }
               onChange={ onInputChange }
             />
           </label>
 
           <label htmlFor="cardAttr1">
-            Attr01
+            Attr01:
             <input
               type="number"
               name="cardAttr1"
-              id="cardAttr1"
               data-testid="attr1-input"
               value={ cardAttr1 }
               onChange={ onInputChange }
@@ -60,11 +57,10 @@ class Form extends React.Component {
           </label>
 
           <label htmlFor="cardAttr2">
-            Attr02
+            Attr02:
             <input
               type="number"
               name="cardAttr2"
-              id="cardAttr2"
               data-testid="attr2-input"
               value={ cardAttr2 }
               onChange={ onInputChange }
@@ -72,53 +68,55 @@ class Form extends React.Component {
           </label>
 
           <label htmlFor="cardAttr3">
-            Attr03
+            Attr03:
             <input
               type="number"
               name="cardAttr3"
-              id="cardAttr3"
               data-testid="attr3-input"
               value={ cardAttr3 }
               onChange={ onInputChange }
             />
           </label>
           <label htmlFor="cardImage">
-            Imagem
+            Imagem:
             <input
               type="text"
               name="cardImage"
-              id="cardImage"
               data-testid="image-input"
               value={ cardImage }
               onChange={ onInputChange }
             />
           </label>
 
-          <label htmlFor="cardRare ">
-            Raridade
+          <label htmlFor="cardRare">
+            Raridade:
             <select
-              name="cardRare "
-              id="cardRare "
+              name="cardRare"
               data-testid="rare-input"
               value={ cardRare }
               onChange={ onInputChange }
             >
-              <option>normal</option>
-              <option>raro</option>
-              <option>muito raro</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muitoRaro">muito raro</option>
             </select>
           </label>
-
-          { hasTrunfo ? <h4>Você já tem um Super Trunfo em seu baralho</h4> : <input
-            type="checkbox"
-            name="cardTrunfo"
-            id="cardTrunfo"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-            label="Super Trybe trunfo"
-          />}
-
+          {
+            hasTrunfo === true
+              ? 'Você já tem um Super Trunfo em seu baralho'
+              : (
+                <label htmlFor="cardTrunfo">
+                  <input
+                    type="checkbox"
+                    name="cardTrunfo"
+                    data-testid="trunfo-input"
+                    checked={ cardTrunfo }
+                    onChange={ onInputChange }
+                  />
+                  Super Trybe Trunfo
+                </label>
+              )
+          }
           <button
             type="submit"
             data-testid="save-button"
